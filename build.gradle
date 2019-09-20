@@ -1,0 +1,39 @@
+buildscript {
+    ext.kotlin_version = "1.2.31"
+    ext.junint_version = "5.3.1"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+test{
+    useJUnit{
+        includeCategories "test.kotlin"
+    }
+}
+
+defaultTasks 'build'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:4+"
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:4+"
+    testCompile "org.seleniumhq.selenium:selenium-safari-driver:4+"
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junint_version"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junint_version"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
